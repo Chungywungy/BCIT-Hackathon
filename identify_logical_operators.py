@@ -56,21 +56,21 @@ def identify_membership_operators(split_string):
         second_operand = identify_membership_operators(result[1])
         if parts[not_index + 1] == "in":
             if result[0] is None:
-                return "is not in {}".format(second_operand)
+                return "is not in{}".format(second_operand)
             elif result[1] is None:
-                return "{} is not in".format(first_operand)
+                return "{}is not in".format(first_operand)
             else:
-                return "{} is not {}".format(first_operand, second_operand)
+                return "{} is not{}".format(first_operand, second_operand)
         elif parts[not_index - 1] == "is":
             if result[0] is None:
                 return "not {}".format(second_operand)
             elif result[1] is None:
                 return "{} not".format(first_operand)
             else:
-                return "{} not {}".format(first_operand, second_operand)
+                return "{}not {}".format(first_operand, second_operand)
         else:
             if result[0] is None:
-                return "is not {}".format(second_operand)
+                return "is not{}".format(second_operand)
             elif result[1] is None:
                 return "{} is not".format(first_operand)
             else:
