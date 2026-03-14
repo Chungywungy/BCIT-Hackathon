@@ -1,7 +1,18 @@
+from identify_operation import *
+from identify_logical_operators import *
+
+
 def while_loop(split_string):
     if "while" in split_string:
-        split_string = split_string.split()
-        print(f'Repeatedly executes while {split_string[1].replace(":", "")} is true.')
+        storage = []
+        for letter in split_string:
+            if letter != ":":
+                storage.append(letter)
+            else:
+                break
+
+        storage = "".join(storage)
+        print(f'{identify_logical_operators(storage)} is true, it repeatedly executes.')
     return
 
 
@@ -13,7 +24,7 @@ def for_loop(split_string):
 
 
 def main():
-    code_block_while_loop = "while alakazam: \n  do_something()"
+    code_block_while_loop = "while alakazam > 1: \n  do_something()"
     code_block_for_loop = "for abra in cadabra: \n  do_something()"
     return while_loop(code_block_while_loop), for_loop(code_block_for_loop)
 
