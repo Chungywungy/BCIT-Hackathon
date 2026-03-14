@@ -9,9 +9,26 @@ def function_name():
 """
 
 
-def parse_function_declaration(function_string):
+def get_return_type(function_string):
     """
+    Get return type.
+    :param function_string:
+    :return:
+    """
+    # get the return type
+    if "def" and "->" in function_string:
+        return_type = function_string.split("->")
+        return_type = return_type[1].replace(":", "").strip()
+        # this gets the return type of the function
+    else:
+        return_type = None  # return type is None when the function_string does not include the return annotation
+    # print("return type:", return_type)
+    return return_type
 
+
+def get_function_name(function_string):
+    """
+    Get function name.
     :param function_string:
     :return:
     """
@@ -19,28 +36,30 @@ def parse_function_declaration(function_string):
     if "def" in function_string:
         function_string = function_string.replace("def", "")
 
-    # get the return type
-    if "->" in function_string:
-        return_type = function_string.split("->")
-        return_type = return_type[1].replace(":", "").strip()
-        # this gets the return type of the function
-    else:
-        return_type = None  # return type is None when the function_string does not include the return annotation
-
-    # get the function name
-    function_string = function_string.split("(")
-    function_name = function_string[0].strip()
+    split_function_string = function_string.split("(")
+    function_name = split_function_string[0].strip()
     # splits string at ( to get the function name
+    # print("function name:", function_name)
 
-    # get parameters
-    parameters = function_string[1].split(")")
-    parameters = parameters[0]
-    # split at the ')' to get everything in between the parentheses; the '(' should already be gone
+    return function_name
+
+
+def get_parameters(function_string):
+    """
+    Get parameters in function.
+    :param function_string:
+    :return:
+    """
+    left_split_function_string = function_string.split("(")
+
+    right_split_function_string = left_split_function_string[1].split(")")
+    parameters = right_split_function_string[0]
+    # split at the '(' and ')' to get everything in between the parentheses
 
     if parameters and ":" in parameters:  # runs if there are parameters with annotations
         parameters_list = parameters.split(",")  # returns a list of variables and function annotations
 
-        #parse parameters; create dictionary to hold each parameter and its type
+        # parse parameters; create dictionary to hold each parameter and its type
         variable_type_dict = {}
         for item in parameters_list:
             stripped_item = item.strip()
@@ -71,8 +90,20 @@ def parse_function_declaration(function_string):
     else:
         parameter_text = "no parameters"
 
-    #putting together the fully parsed string
-    if return_type:  # runs if there is a return type
+    return parameter_text
+
+
+def parse_function_declaration(function_string):
+    """
+    Put together full text string to parse function.
+    :param function_string:
+    :return:
+    """
+    return_type = get_return_type(function_string)
+    function_name = get_function_name(function_string)
+    parameter_text = get_parameters(function_string)
+
+    if return_type:  # runs if there is a return type (not None)
         function_declaration_string = (f"{function_name} is declared as a function. It takes {parameter_text} and "
                                        f"returns {return_type}.")
     else:  #runs if there return type is None
