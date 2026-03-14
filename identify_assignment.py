@@ -17,7 +17,7 @@ def print_assignment(split_string_line: str):
         assigner = identify_operation.identify_operations(string_parts[index].strip())
         index += 1
 
-    print(f"Sets {assignee} equal to {assigner}")
+    return f"Sets {assignee} equal to {assigner}"
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
         print_assignment(my_string)
     my_string = "x = y + z"
     if identify_assignment(my_string):
-        print_assignment(my_string)
+        print(print_assignment(my_string))
 
 
 if __name__ == "__main__":
