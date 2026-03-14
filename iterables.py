@@ -5,7 +5,7 @@ from identify_logical_operators import *
 def while_loop(split_string):
     if "while" in split_string:
         storage = []
-        test = []
+        cache = []
         colon_checker = False
         for letter in split_string:
             if letter != ":":
@@ -16,11 +16,15 @@ def while_loop(split_string):
         storage = "".join(storage)
         for letter in split_string:
             if colon_checker:
-                test.append(letter)
+                cache.append(letter)
             if letter == ":":
                 colon_checker = True
-        test = "".join(test)
-        print(f'{identify_logical_operators(storage)} is true, it repeatedly executes'f' {identify_operations(test)}.')
+
+
+        cache = "".join(cache)
+
+
+        print(f'{identify_logical_operators(storage)} is true, it repeatedly executes'f' {identify_operations(cache)}.')
     return
 
 
@@ -29,6 +33,9 @@ def for_loop(split_string):
         split_string = split_string.split()
         print(f"Iterates through each {split_string[1]} in the {split_string[3].replace(":", "")} using a for loop.")
     return
+
+def check_if(split_string):
+    pass
 
 
 def main():
