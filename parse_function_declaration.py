@@ -13,9 +13,11 @@ def function_name():
 
 def get_return_type(function_string):
     """
-    Get return type.
-    :param function_string:
-    :return:
+    Get the function's return type.
+    :param function_string: a string of text representing the line declaring a function in the python language
+    :precondition: function_string must be a syntactically correct string for declaring a function
+    :postcondition: parse the data type that the function will return, if available
+    :return: a string that represents the function's returns data type
     """
     if "def" and "->" in function_string:
         return_type = function_string.split("->")
@@ -29,9 +31,11 @@ def get_return_type(function_string):
 
 def get_function_name(function_string):
     """
-    Get function name.
-    :param function_string:
-    :return:
+    Get the function's name.
+    :param function_string: a string of text representing the line declaring a function in the python language
+    :precondition: function_string must be a syntactically correct string for declaring a function
+    :postcondition: correctly parse the function name
+    :return: the function name as a string
     """
     # removes def from the string
     if "def" in function_string:
@@ -48,8 +52,10 @@ def get_function_name(function_string):
 def get_parameters(function_string):
     """
     Get parameters in function.
-    :param function_string:
-    :return:
+    :param function_string: a string of text representing the line declaring a function in the python language
+    :precondition: function_string must be a syntactically correct string for declaring a function
+    :postcondition: translate the text for the parameters
+    :return: a description of the parameters as the string
     """
     left_split_function_string = function_string.split("(")
 
@@ -59,8 +65,8 @@ def get_parameters(function_string):
 
     if parameters and ":" in parameters:  # runs if there are parameters with annotations
         parameters_list = parameters.split(",")  # returns a list of variables and function annotations
-
         # parse parameters; create dictionary to hold each parameter and its type
+
         variable_type_dict = {}
         for item in parameters_list:
             stripped_item = item.strip()
@@ -77,7 +83,7 @@ def get_parameters(function_string):
             parameter_description.append(f"{key} as {value}")
         # creates list to hold parameter descriptions i.e. ['x as int, y as float']
 
-        parameter_text = ", ".join(parameter_description)  # turn the parameter list into a one line string
+        parameter_text = ", and ".join(parameter_description)  # turn the parameter list into a one line string
 
     elif parameters and ":" not in parameters:  # runs case where parameters exist, but no annotations are written
         parameters_list = parameters.split(",")
@@ -86,7 +92,7 @@ def get_parameters(function_string):
         for item in parameters_list:
             stripped_item = item.strip()
             stripped_parameters_list.append(stripped_item)
-        parameter_text = ", ".join(stripped_parameters_list)  # creates list to hold parameters
+        parameter_text = ", and ".join(stripped_parameters_list)  # creates list to hold parameters
 
     else:
         parameter_text = "no parameters"
@@ -96,9 +102,11 @@ def get_parameters(function_string):
 
 def parse_function_declaration(function_string):
     """
-    Put together full text string to parse function.
-    :param function_string:
-    :return:
+    Put together full text string to give brief description of the function declaration.
+    :param function_string: a string of text representing the line declaring a function in the python language
+    :precondition: function_string must be a syntactically correct string for declaring a function
+    :postcondition: correctly describe the function declaration
+    :return: a string that describes the function declaration
     """
     return_type = get_return_type(function_string)
     function_name = get_function_name(function_string)
@@ -122,17 +130,17 @@ def main():
     # with parameters and annotations
     parse_function_declaration("def function_name(x: int, y: float, z: str) -> int:")
 
-    # with parameters without annotations
-    parse_function_declaration("def function_name(x, y) -> int:")
+    # # with parameters without annotations
+    # parse_function_declaration("def function_name(x, y) -> int:")
 
-    # with parameters without annotations, without return annotation
-    parse_function_declaration("def function_name(x, y)")
-
-    #without parameters
-    parse_function_declaration("def another_function() -> int:")
-
-    #without parameters and return annotation
-    parse_function_declaration("def wow_another_one():")
+    # # with parameters without annotations, without return annotation
+    # parse_function_declaration("def function_name(x, y)")
+    #
+    # #without parameters
+    # parse_function_declaration("def another_function() -> int:")
+    #
+    # #without parameters and return annotation
+    # parse_function_declaration("def wow_another_one():")
 
 
 if __name__ == "__main__":
