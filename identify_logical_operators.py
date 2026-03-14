@@ -124,7 +124,7 @@ def main():
     print(identify_membership_operators("x not in y"))
     print(identify_membership_operators("x not y"))
     print(identify_membership_operators("x in y"))
-    print(identify_membership_operators("x in y and x is not z"))
+    print(identify_membership_operators("x in y and x is not z or is x and not p"))
     print(identify_logical_operators("x == y"))
     print(identify_logical_operators("x != y"))
     print(identify_logical_operators("x <= y"))
