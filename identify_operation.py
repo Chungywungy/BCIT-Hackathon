@@ -1,10 +1,15 @@
-# assume that the function is split and each line of code is
-# stored in a string inside a list, we loop
-# so list[index] refers to each line in the string
-# precondition : there is a white space around operators -saba
+"""
+This module identifies and explains arithmetic operations in a line of a function.
+"""
 
-# i think += and -= should be in assignment instead of operators, im not going to move them this instant but
-# this should be considered for making everything mesh in the future when we're refactoring this -ollie
+
+# Assume that the function is split and each line of code is
+# Stored in a string inside a list, we loop
+# So list[index] refers to each line in the string
+# Precondition : there is a white space around operators -saba
+
+# I think += and -= should be in assignment instead of operators, im not going to move them this instant but
+# This should be considered for making everything mesh in the future when we're refactoring this -ollie
 
 def return_operations(split_string: str, operator: str) -> list:
     """
@@ -25,6 +30,7 @@ def return_operations(split_string: str, operator: str) -> list:
     parts.pop(parts.index(operator))
     second_operand = " ".join(parts)
     return [first_operand, second_operand]
+
 
 def identify_operations(split_string: str) -> str:
     """
@@ -80,7 +86,9 @@ def identify_operations(split_string: str) -> str:
         #ordering matters cause if we put / before this, we never get to // block
         result = return_operations(split_string, "//")
 
-        return "the quotient of {} and {}, rounded down to the nearest whole number".format(result[0], identify_operations(result[1]))
+        return "the quotient of {} and {}, rounded down to the nearest whole number".format(result[0],
+                                                                                            identify_operations(
+                                                                                                result[1]))
     elif "/=" in split_string:
         result = return_operations(split_string, "/=")
 
@@ -101,13 +109,16 @@ def identify_operations(split_string: str) -> str:
 
 
 def main():
+    """
+    Drive the program.
+    """
     my_string = "x += y"
     print(identify_operations(my_string))
     my_second_string = "x + y"
     print(identify_operations(my_second_string))
-    # i minorly refactored this function for this exact case. i feel like this reads a heck of a lot better than
-    # "increases x by x added to y" which is what the recursive case would give us. i will look more into what
-    # sort of edge cases this approach could produce though and we'll come up with a final decision tmrw
+    # I minorly refactored this function for this exact case. I feel like this reads a heck of a lot better than
+    # "Increases x by x added to y" which is what the recursive case would give us. I will look more into what
+    # Sort of edge cases this approach could produce though, and we'll come up with a final decision tmrw
     my_third_string = "x += x + c * y "
     print(identify_operations(my_third_string))
 
