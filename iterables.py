@@ -1,5 +1,6 @@
 from identify_operation import *
 from identify_logical_operators import *
+from identify_functions import *
 
 
 def while_loop(split_string):
@@ -44,7 +45,7 @@ def conditionals(split_string):
                 break
         storage = "".join(storage)
 
-    print(f"checks {identify_logical_operators(storage)}")
+    print(f"checks {replaces_function_calls(identify_comparison_operators(storage))}")
 
     if "elif" in split_string:
         colon_checker = True
@@ -61,7 +62,7 @@ def conditionals(split_string):
 
         elif_storage = "".join(elif_storage[:-1])
 
-    print(f"otherwise it checks {identify_logical_operators(elif_storage)}")
+        print(f"otherwise it checks {replaces_function_calls(identify_comparison_operators(elif_storage))}")
 
     if "else" in split_string:
         colon_checker = False
@@ -76,16 +77,17 @@ def conditionals(split_string):
             if letter == ":":
                 colon_checker = True
 
-    else_storage = "".join(else_storage)
+        else_storage = "".join(else_storage)
 
-    print(f"otherwise it checks {identify_logical_operators(else_storage)}")
-    return
+        print(f"if none of these conditions are true it gets {replaces_function_calls(identify_comparison_operators(else_storage))}")
+
+    return replaces_function_calls(split_string)
 
 
 def main():
     code_block_while_loop = "while alakazam > 1: \n  abra + cadabra"
     code_block_for_loop = "for abra in cadabra: \n  do_something()"
-    code_block_conditionals = "if 1 > 2: \n do_anything() \n elif 1 < 2: please_work() \n else: 1 + 2"
+    code_block_conditionals = "if 1 > int(2): \n do_anything() \n elif 1 < range(2): please_work() \n else: 1 + 2"
     return while_loop(code_block_while_loop), for_loop(code_block_for_loop), conditionals(code_block_conditionals)
 
 
