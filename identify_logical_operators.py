@@ -56,13 +56,25 @@ def identify_membership_operators(split_string):
         second_operand = identify_membership_operators(result[1])
         if parts[not_index + 1] == "in":
             if result[0] is None:
-                return "is in {}".format(second_operand)
+                return "is not in {}".format(second_operand)
             elif result[1] is None:
-                return "{} is in".format(first_operand)
+                return "{} is not in".format(first_operand)
             else:
                 return "{} is not {}".format(first_operand, second_operand)
+        elif parts[not_index - 1] == "is":
+            if result[0] is None:
+                return "not {}".format(second_operand)
+            elif result[1] is None:
+                return "{} not".format(first_operand)
+            else:
+                return "{} not {}".format(first_operand, second_operand)
         else:
-            return "{} not {}".format(first_operand, second_operand)
+            if result[0] is None:
+                return "is not {}".format(second_operand)
+            elif result[1] is None:
+                return "{} is not".format(first_operand)
+            else:
+                return "{} is not {}".format(first_operand, second_operand)
     elif "and" in parts:
         result = parse_logical_operators(split_string, "and")
         first_operand = identify_membership_operators(result[0])
@@ -108,12 +120,11 @@ def identify_membership_operators(split_string):
 
 
 
-
-
 def main():
     print(identify_membership_operators("x not in y"))
     print(identify_membership_operators("x not y"))
     print(identify_membership_operators("x in y"))
+    print(identify_membership_operators("x in y and x is not z"))
     print(identify_logical_operators("x == y"))
     print(identify_logical_operators("x != y"))
     print(identify_logical_operators("x <= y"))
@@ -123,7 +134,7 @@ def main():
     print(identify_logical_operators("x == y + z * 3"))
     print(identify_logical_operators("x > y"))
     print(identify_logical_operators("x < y"))
-    print(identify_membership_operators("x in y and x is not z"))
+
 
 if __name__ == "__main__":
     main()
