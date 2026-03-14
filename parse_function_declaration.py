@@ -110,8 +110,6 @@ def parse_function_declaration(function_string):
     else:  #runs if there return type is None
         function_declaration_string = f"{function_name} is declared as a function. It takes {parameter_text}."
 
-    print(function_declaration_string)
-
     return function_declaration_string
 
 
