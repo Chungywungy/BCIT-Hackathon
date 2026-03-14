@@ -4,105 +4,74 @@
 # precondition : there is a white space around operators -saba
 
 # i think += and -= should be in assignment instead of operators, im not going to move them this instant but
-# this should be considered for making everything mesh in the future when we're refactoring this
+# this should be considered for making everything mesh in the future when we're refactoring this -ollie
 
+def return_operations(split_string: str, operator: str):
+    parts = split_string.split()
+    operator_position = parts.index(operator)
+    first_operand = parts[operator_position - 1]
+    parts.pop(operator_position - 1)
+    parts.pop(parts.index(operator))
+    second_operand = " ".join(parts)
+    return [first_operand, second_operand]
 
 def identify_operations(split_string):
     if "+=" in split_string:
-        parts = split_string.split()
-        addition_position = parts.index("+=")
-        operand = parts[addition_position - 1]
-        addition_value = parts[addition_position + 1]
-        print("Increase {} by {}.".format(operand, addition_value))
-        return "Increase {} by {}.".format(operand, addition_value)
+        result = return_operations(split_string, "+=")
+        print("Increases {} by {}.".format(result[0], result[1]))
+        return "Increases {} by {}.".format(result[0], result[1])
     elif "+" in split_string:
-        parts = split_string.split()
-        addition_position = parts.index("+")
-        first_operand = parts[addition_position - 1]
-        second_operand = parts[addition_position + 1]
-        print("Add {} with {}".format(first_operand, second_operand))
-        return "Add {} with {}".format(first_operand, second_operand)
+        result = return_operations(split_string, "+")
+        print("Adds {} with {}".format(result[0], result[1]))
+        return "Adds {} with {}".format(result[0], result[1])
     elif "-=" in split_string:
-        parts = split_string.split()
-        subtraction_position = parts.index("-=")
-        operand = parts[subtraction_position - 1]
-        subtraction_value = parts[subtraction_position + 1]
-        print("Decrease {} by {}.".format(operand, subtraction_value))
-        return "Decrease {} by {}.".format(operand, subtraction_value)
+        result = return_operations(split_string, "-=")
+        print("Decrease {} by {}.".format(result[0], result[1]))
+        return "Decrease {} by {}.".format(result[0], result[1])
     elif "-" in split_string:
-        parts = split_string.split()
-        subtraction_position = parts.index("-")
-        first_operand = parts[subtraction_position - 1]
-        second_operand = parts[subtraction_position + 1]
-        print("Subtract {} from {}.".format(second_operand, first_operand))
-        return "Subtract {} from {}.".format(second_operand, first_operand)
+        result = return_operations(split_string, "-")
+        print("Subtract {} from {}.".format(result[0], result[1]))
+        return "Subtract {} from {}.".format(result[0], result[1])
     elif "**=" in split_string:
         # we should do this first otherwise we're not getting into this block
-        parts = split_string.split()
-        multiply_position = parts.index("**=")
-        first_operand = parts[multiply_position - 1]
-        second_operand = parts[multiply_position + 1]
-        print("Set {} to itself raised to the power of {}.".format(first_operand, second_operand))
-        return "Set {} to itself raised to the power of {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "**=")
+        print("Set {} to itself raised to the power of {}.".format(result[0], result[1]))
+        return "Set {} to itself raised to the power of {}.".format(result[0], result[1])
     elif "**" in split_string:
-        parts = split_string.split()
-        multiply_position = parts.index("**")
-        first_operand = parts[multiply_position - 1]
-        second_operand = parts[multiply_position + 1]
-        print("Raise {} to the power of {}.".format(first_operand, second_operand))
-        return "Raise {} to the power of {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "**")
+        print("Raise {} to the power of {}.".format(result[0], result[1]))
+        return "Raise {} to the power of {}.".format(result[0], result[1])
     elif "*=" in split_string:
         # *= and * are translated the same
-        parts = split_string.split()
-        multiply_position = parts.index("*=")
-        first_operand = parts[multiply_position - 1]
-        second_operand = parts[multiply_position + 1]
-        print("Multiply {} by {}.".format(first_operand, second_operand))
-        return "Multiply {} by {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "*=")
+        print("Multiply {} by {}.".format(result[0], result[1]))
+        return "Multiply {} by {}.".format(result[0], result[1])
     elif "*" in split_string:
         # *= and * are translated the same
-        parts = split_string.split()
-        multiply_position = parts.index("*")
-        first_operand = parts[multiply_position - 1]
-        second_operand = parts[multiply_position + 1]
-        print("Multiply {} with {}.".format(first_operand, second_operand))
-        return "Multiply {} with {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "*")
+        print("Multiply {} with {}.".format(result[0], result[1]))
+        return "Multiply {} with {}.".format(result[0], result[1])
     elif "//" in split_string:
         #ordering matters cause if we put / before this, we never get to // block
-        parts = split_string.split()
-        int_division_position = parts.index("//")
-        first_operand = parts[int_division_position - 1]
-        second_operand = parts[int_division_position + 1]
-        print("Divide {} by {}, rounding down to the nearest whole number.".format(first_operand, second_operand))
-        return "Divide {} by {}, rounding down to the nearest whole number.".format(first_operand, second_operand)
+        result = return_operations(split_string, "//")
+        print("Divide {} by {}, rounding down to the nearest whole number.".format(result[0], result[1]))
+        return "Divide {} by {}, rounding down to the nearest whole number.".format(result[0], result[1])
     elif "/=" in split_string:
-        parts = split_string.split()
-        division_position = parts.index("/=")
-        first_operand = parts[division_position - 1]
-        second_operand = parts[division_position + 1]
-        print("Divide {} by {}.".format(first_operand, second_operand))
-        return "Divide {} by {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "/=")
+        print("Divide {} by {}.".format(result[0], result[1]))
+        return "Divide {} by {}.".format(result[0], result[1])
     elif "/" in split_string:
-        parts = split_string.split()
-        division_position = parts.index("/")
-        first_operand = parts[division_position - 1]
-        second_operand = parts[division_position + 1]
-        print("Divide {} with {}.".format(first_operand, second_operand))
-        return "Divide {} with {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "/")
+        print("Divide {} with {}.".format(result[0], result[1]))
+        return "Divide {} with {}.".format(result[0], result[1])
     elif "%=" in split_string:
-        parts = split_string.split()
-        remainder_position = parts.index("%=")
-        first_operand = parts[remainder_position - 1]
-        second_operand = parts[remainder_position + 1]
-        print("Set {} to the remainder when divided by {}.".format(first_operand, second_operand))
-        return "Set {} to the remainder when divided by {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "%=")
+        print("Set {} to the remainder when divided by {}.".format(result[0], result[1]))
+        return "Set {} to the remainder when divided by {}.".format(result[0], result[1])
     elif "%" in split_string:
-        parts = split_string.split()
-        modulo_position = parts.index("%")
-        first_operand = parts[modulo_position - 1]
-        second_operand = parts[modulo_position + 1]
-        print("Find the remainder when {} is divided by {}.".format(first_operand, second_operand))
-        return "Find the remainder when {} is divided by {}.".format(first_operand, second_operand)
+        result = return_operations(split_string, "%")
+        print("Find the remainder when {} is divided by {}.".format(result[0], result[1]))
+        return "Find the remainder when {} is divided by {}.".format(result[0], result[1])
     else:
         print(split_string)
         return split_string
@@ -113,8 +82,9 @@ def main():
     identify_operations(my_string)
     my_second_string = "x + y"
     identify_operations(my_second_string)
-    # this needs implementation, right now it assumes only singular operators. will refactor tmrw morning
-    # VVV other than this, it functions as expected.
+    # i minorly refactored this function for this exact case. i feel like this reads a heck of a lot better than
+    # "increases x by x added to y" which is what the recursive case would give us. i will look more into what
+    # sort of edge cases this approach could produce though and we'll come up with a final decision tmrw
     my_third_string = "x += x + y"
     identify_operations(my_third_string)
 
