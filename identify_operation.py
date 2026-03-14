@@ -1,7 +1,12 @@
 # assume that the function is split and each line of code is
 # stored in a string inside a list, we loop
 # so list[index] refers to each line in the string
-# precondition : there is a white space around operators
+# precondition : there is a white space around operators -saba
+
+# i think += and -= should be in assignment instead of operators, im not going to move them this instant but
+# this should be considered for making everything mesh in the future when we're refactoring this
+
+
 def identify_operations(split_string):
     index = 0
     while index < len(split_string):
@@ -11,6 +16,7 @@ def identify_operations(split_string):
             operand = parts[addition_position - 1]
             addition_value = parts[addition_position + 1]
             print("Increase {} by {}.".format(operand, addition_value))
+            return "Increase {} by {}.".format(operand, addition_value)
         elif "+" in split_string[index]:
             parts = split_string[index].split()
             addition_position = parts.index("+")
@@ -87,4 +93,26 @@ def identify_operations(split_string):
             first_operand = parts[modulo_position - 1]
             second_operand = parts[modulo_position + 1]
             print("Find the remainder when {} is divided by {}.".format(first_operand, second_operand))
+        else:
+            print(split_string[index])
+            return(split_string[index])
         index += 1
+
+
+def main():
+    my_string = "def my_function(x, y): \n x += y"
+    my_split_string = my_string.split("\n")
+    identify_operations(my_split_string)
+    my_second_string = "def my_function(x, y): \n x + y"
+    my_second_split_string = my_second_string.split("\n")
+    identify_operations(my_second_split_string)
+    # this needs implementation, right now it assumes only singular operators. will refactor tmrw morning
+    # VVV other than this, it functions as expected.
+    my_third_string = "def my_function(x, y): \n x - y \n x += x % y"
+    my_third_split_string = my_third_string.split("\n")
+    identify_operations(my_third_split_string)
+
+
+
+if __name__ == "__main__":
+    main()
