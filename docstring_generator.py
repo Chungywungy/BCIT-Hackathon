@@ -14,6 +14,13 @@ def main():
     line1 = parse_function_declaration.parse_function_declaration(contents[0])
     for line in contents:
         pass
+        #id iterables
+        #which should id functions
+        #which should id membership operations
+        #which should id logic operations
+        #you get the idea
+        #then store it in a list and go through the list printing line by line.
+
     print(line1)
 
 if __name__ == "__main__":
