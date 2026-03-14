@@ -6,7 +6,18 @@
 # i think += and -= should be in assignment instead of operators, im not going to move them this instant but
 # this should be considered for making everything mesh in the future when we're refactoring this -ollie
 
-def return_operations(split_string: str, operator: str):
+def return_operations(split_string: str, operator: str) -> list:
+    """
+    Extracts the two operands surrounding a given operator in a tokenized expression string.
+
+    :param split_string: a whitespace-separated expression string
+    :param operator: the operator token to locate
+    :precondition: there is a white space around the operators
+    :postcondition: find the index of the operator, split the strings in 2 parts,
+                    first operand (left of the operator) and second operand (right of the operator)
+    :return: a two-element list, the first operand (immediately left
+             of the operator) and the second operand (all remaining tokens joined).
+    """
     parts = split_string.split()
     operator_position = parts.index(operator)
     first_operand = parts[operator_position - 1]
@@ -15,7 +26,21 @@ def return_operations(split_string: str, operator: str):
     second_operand = " ".join(parts)
     return [first_operand, second_operand]
 
-def identify_operations(split_string):
+def identify_operations(split_string: str) -> str:
+    """
+    Recursively translates a Python arithmetic expression string into plain English.
+
+    :param split_string: a whitespace-separated arithmetic expression
+    :precondition: split_string is a whitespace-separated expression string containing
+                  at most one operator per recursive level. Compound operators ( += or -= etc.)
+                  must be checked before their substrings (e.g. +) to avoid mismatches.
+    :postcondition: whenever there is an operation in the line, split it calling the return_operation
+                   function, to get the right hand side and left hand side of the operation
+    :postcondition: repeat the process until there's no other arithmetic operation in the line
+    :postcondition: if split_string contains no recognized operator, it is returned unchanged
+                    as the base case of the recursion
+    :return: a plain-English translation of the arithmetic operation in an expression in string
+    """
     if "+=" in split_string:
         result = return_operations(split_string, "+=")
 

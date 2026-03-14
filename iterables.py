@@ -19,11 +19,7 @@ def while_loop(split_string):
                 test.append(letter)
             if letter == ":":
                 colon_checker = True
-
-
         test = "".join(test)
-
-
         print(f'{identify_logical_operators(storage)} is true, it repeatedly executes'f' {identify_operations(test)}.')
     return
 
