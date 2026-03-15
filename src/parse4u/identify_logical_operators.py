@@ -36,7 +36,7 @@ def parse_logical_operators(split_string: str, operator: str) -> list:
     return [first_operand, second_operand]
 
 
-def identify_comparison_operators(split_string: str):
+def identify_comparison_operators(split_string: str) -> str:
     """
     Recursively identify and explain the comparison operators in an expression in a plain English( a line of code).
 
@@ -75,7 +75,7 @@ def identify_comparison_operators(split_string: str):
         return identify_operations(split_string)
 
 
-def identify_membership_operators(split_string: str):
+def identify_membership_operators(split_string: str) -> str:
     """
     Recursively identify and explain membership operations in an expression.
 
