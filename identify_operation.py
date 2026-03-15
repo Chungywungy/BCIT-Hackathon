@@ -1,15 +1,10 @@
-"""
-This module identifies and explains arithmetic operations in a line of a function.
-"""
+# assume that the function is split and each line of code is
+# stored in a string inside a list, we loop
+# so list[index] refers to each line in the string
+# precondition : there is a white space around operators -saba
 
-
-# Assume that the function is split and each line of code is
-# Stored in a string inside a list, we loop
-# So list[index] refers to each line in the string
-# Precondition : there is a white space around operators -saba
-
-# I think += and -= should be in assignment instead of operators, im not going to move them this instant but
-# This should be considered for making everything mesh in the future when we're refactoring this -ollie
+# i think += and -= should be in assignment instead of operators, im not going to move them this instant but
+# this should be considered for making everything mesh in the future when we're refactoring this -ollie
 
 def return_operations(split_string: str, operator: str) -> list:
     """
@@ -31,7 +26,6 @@ def return_operations(split_string: str, operator: str) -> list:
     second_operand = " ".join(parts)
     return [first_operand, second_operand]
 
-
 def identify_operations(split_string: str) -> str:
     """
     Recursively translates a Python arithmetic expression string into plain English.
@@ -51,75 +45,43 @@ def identify_operations(split_string: str) -> str:
         result = return_operations(split_string, "+=")
 
         return "Increases {} by {}".format(result[0], identify_operations(result[1]))
-    elif "+" in split_string:
-        result = return_operations(split_string, "+")
-
-        return "the sum of {} and {}".format(result[0], identify_operations(result[1]))
     elif "-=" in split_string:
         result = return_operations(split_string, "-=")
 
         return "Decrease {} by {}".format(result[0], identify_operations(result[1]))
-    elif "-" in split_string:
-        result = return_operations(split_string, "-")
-
-        return "the difference of {} and {}".format(result[0], identify_operations(result[1]))
     elif "**=" in split_string:
         # we should do this first otherwise we're not getting into this block
         result = return_operations(split_string, "**=")
 
         return "Set {} to itself raised to the power of {}.".format(result[0], identify_operations(result[1]))
-    elif "**" in split_string:
-        result = return_operations(split_string, "**")
-
-        return "{} raised to the power of {}".format(result[0], identify_operations(result[1]))
     elif "*=" in split_string:
         # *= and * are translated the same
         result = return_operations(split_string, "*=")
 
         return "Multiply {} by {}".format(result[0], identify_operations(result[1]))
-    elif "*" in split_string:
-        # *= and * are translated the same
-        result = return_operations(split_string, "*")
-
-        return "the product of {} and {}".format(result[0], identify_operations(result[1]))
-    elif "//" in split_string:
-        #ordering matters cause if we put / before this, we never get to // block
-        result = return_operations(split_string, "//")
-
-        return "the quotient of {} and {}, rounded down to the nearest whole number".format(result[0],
-                                                                                            identify_operations(
-                                                                                                result[1]))
     elif "/=" in split_string:
         result = return_operations(split_string, "/=")
 
         return "Divide {} by {}".format(result[0], identify_operations(result[1]))
-    elif "/" in split_string:
-        result = return_operations(split_string, "/")
-
-        return "the quotient of {} and {}".format(result[0], identify_operations(result[1]))
     elif "%=" in split_string:
         result = return_operations(split_string, "%=")
 
         return "Set {} to the remainder when divided by {}".format(result[0], identify_operations(result[1]))
-    elif "%" in split_string:
-        result = return_operations(split_string, "%")
-        return "the remainder when {} is divided by {}".format(result[0], identify_operations(result[1]))
+    elif "**" in split_string:
+        return split_string.replace("**", "^")
     else:
         return split_string
 
 
 def main():
-    """
-    Drive the program.
-    """
     my_string = "x += y"
     print(identify_operations(my_string))
     my_second_string = "x + y"
     print(identify_operations(my_second_string))
-    # I minorly refactored this function for this exact case. I feel like this reads a heck of a lot better than
-    # "Increases x by x added to y" which is what the recursive case would give us. I will look more into what
-    # Sort of edge cases this approach could produce though, and we'll come up with a final decision tmrw
-    my_third_string = "x += x + c * y "
+    # i minorly refactored this function for this exact case. i feel like this reads a heck of a lot better than
+    # "increases x by x added to y" which is what the recursive case would give us. i will look more into what
+    # sort of edge cases this approach could produce though and we'll come up with a final decision tmrw
+    my_third_string = "x += (x + (c ** y)) * 2"
     print(identify_operations(my_third_string))
 
 

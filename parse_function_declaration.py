@@ -83,7 +83,13 @@ def get_parameters(function_string):
             parameter_description.append(f"{key} as {value}")
         # creates list to hold parameter descriptions i.e. ['x as int, y as float']
 
-        parameter_text = ", and ".join(parameter_description)  # turn the parameter list into a one line string
+        if len(parameters_list) >= 3:
+            parameter_text = "{}, and {} for parameters".format(", ".join(parameter_description[:-1]),
+                                                                parameter_description[-1])
+        elif len(parameters_list) == 2:
+            parameter_text = "{} for parameters".format(" and ".join(parameter_description), )
+        else:
+            parameter_text = "{} for a parameter".format(", ".join(parameter_description), )
 
     elif parameters and ":" not in parameters:  # runs case where parameters exist, but no annotations are written
         parameters_list = parameters.split(",")
@@ -92,9 +98,16 @@ def get_parameters(function_string):
         for item in parameters_list:
             stripped_item = item.strip()
             stripped_parameters_list.append(stripped_item)
-        parameter_text = ", and ".join(stripped_parameters_list)  # creates list to hold parameters
 
-    else:
+        if len(parameters_list) >= 3:
+            parameter_text = "{}, and {} for parameters".format(", ".join(stripped_parameters_list[:-1]),
+                                                                stripped_parameters_list[-1])
+        elif len(parameters_list) == 2:
+            parameter_text = "{} for parameters".format(" and ".join(stripped_parameters_list))
+        else:
+            parameter_text = "{} for a parameter".format(", ".join(stripped_parameters_list), )
+
+    else:  # runs in the case there are no parameters
         parameter_text = "no parameters"
 
     return parameter_text
@@ -118,6 +131,7 @@ def parse_function_declaration(function_string):
     else:  #runs if there return type is None
         function_declaration_string = f"{function_name} is declared as a function. It takes {parameter_text}."
 
+    print(function_declaration_string)
     return function_declaration_string
 
 
@@ -125,20 +139,32 @@ def main():
     """
     Drive the function.
     """
-    # with parameters and annotations
+    # with 3 parameters and annotations
     parse_function_declaration("def function_name(x: int, y: float, z: str) -> int:")
 
-    # # with parameters without annotations
-    # parse_function_declaration("def function_name(x, y) -> int:")
+    #with 2 parameters and annotations
+    parse_function_declaration("def function_name(x: int, y: float) -> int:")
 
-    # # with parameters without annotations, without return annotation
-    # parse_function_declaration("def function_name(x, y)")
-    #
-    # #without parameters
-    # parse_function_declaration("def another_function() -> int:")
-    #
-    # #without parameters and return annotation
-    # parse_function_declaration("def wow_another_one():")
+    # with 1 parameter and annotations
+    parse_function_declaration("def function_name(x: int) -> int:")
+
+    # with 3 parameters without annotations
+    parse_function_declaration("def function_name(x, y, z) -> int:")
+
+    # with 2 parameters without annotations
+    parse_function_declaration("def function_name(x, y) -> int:")
+
+    # with 1 parameter without annotations
+    parse_function_declaration("def function_name(x) -> int:")
+
+    # with parameters without annotations, without return annotation
+    parse_function_declaration("def function_name(x, y)")
+
+    #without parameters
+    parse_function_declaration("def another_function() -> int:")
+
+    #without parameters and return annotation
+    parse_function_declaration("def wow_another_one():")
 
 
 if __name__ == "__main__":
