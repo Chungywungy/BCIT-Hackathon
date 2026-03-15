@@ -70,34 +70,34 @@ def conditionals(split_string: list):
 
             continuation_output = continuation(line)
             if continuation_output:
-                container.append(continuation_output+"\n")
+                container.append(continuation_output)
                 non_applicable = True
                 break
 
             breaker_output = breaker(line)
             if breaker_output:
-                container.append(breaker_output+"\n")
+                container.append(breaker_output)
                 non_applicable = True
                 break
 
             passer_output = passer(line)
             if passer_output:
-                container.append(passer_output+"\n")
+                container.append(passer_output)
                 non_applicable = True
                 break
 
             try_except_output = try_and_except(line)
             if try_except_output:
-                container.append(try_except_output+"\n")
+                container.append(try_except_output)
                 non_applicable = True
                 break
 
         if not non_applicable:
             value = replaces_function_calls(identify_comparison_operators(line))
-            container.append(value.strip()+"\n")
+            container.append(value.strip())
 
 
-    return "".join(container)
+    return ", ".join(container)
 
 
 def main():
