@@ -11,7 +11,7 @@ def function_name():
 """
 
 
-def get_return_type(function_string):
+def get_return_type(function_string: str) -> str:
     """
     Get the function's return type.
     :param function_string: a string of text representing the line declaring a function in the python language
@@ -24,12 +24,12 @@ def get_return_type(function_string):
         return_type = return_type[1].replace(":", "").strip()
         # this gets the return type of the function
     else:
-        return_type = None  # return type is None when the function_string does not include the return annotation
+        return_type = "" # return type is None when the function_string does not include the return annotation
     # print("return type:", return_type)
     return return_type
 
 
-def get_function_name(function_string):
+def get_function_name(function_string: str) -> str:
     """
     Get the function's name.
     :param function_string: a string of text representing the line declaring a function in the python language
@@ -49,7 +49,7 @@ def get_function_name(function_string):
     return function_name
 
 
-def get_parameters(function_string):
+def get_parameters(function_string: str) -> str:
     """
     Get parameters in function.
     :param function_string: a string of text representing the line declaring a function in the python language
@@ -113,7 +113,7 @@ def get_parameters(function_string):
     return parameter_text
 
 
-def parse_function_declaration(function_string):
+def parse_function_declaration(function_string: str) -> str:
     """
     Put together full text string to give brief description of the function declaration.
     :param function_string: a string of text representing the line declaring a function in the python language
