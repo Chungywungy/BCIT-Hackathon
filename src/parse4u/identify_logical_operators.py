@@ -3,7 +3,6 @@ This module identifies and explains logical operations and comparison operations
 a line of a function.
 """
 import identify_operation
-import identify_assignment
 
 
 def parse_logical_operators(split_string: str, operator: str) -> list:

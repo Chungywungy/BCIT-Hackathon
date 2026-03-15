@@ -1,5 +1,5 @@
-from identify_logical_operators import *
-from identify_functions import *
+from src.parse4u.identify_logical_operators import *
+from src.parse4u.identify_functions import *
 from try_except import *
 
 def while_loop(split_string: str) -> str | None:

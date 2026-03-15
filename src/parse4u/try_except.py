@@ -1,6 +1,3 @@
-import parse_function_declaration
-import iterables
-
 def try_and_except(split_string):
     lines = split_string.split()
 
