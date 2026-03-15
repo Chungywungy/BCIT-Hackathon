@@ -67,6 +67,10 @@ def identify_operations(split_string: str) -> str:
         result = return_operations(split_string, "%=")
 
         return "Set {} to the remainder when divided by {}".format(result[0], identify_operations(result[1]))
+    elif "=" in split_string:
+        result = return_operations(split_string, "=")
+
+        return "sets {} equal to {}".format(result[0], identify_operations(result[1]))
     elif "**" in split_string:
         return split_string.replace("**", "^")
     else:

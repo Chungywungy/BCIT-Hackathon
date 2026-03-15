@@ -72,9 +72,6 @@ def identify_comparison_operators(split_string: str):
     elif ">" in split_string:
         result = parse_logical_operators(split_string, ">")
         return "{} is greater than {}".format(result[0], identify_comparison_operators(result[1]))
-    elif "=" in split_string:
-        if identify_assignment.identify_assignment(split_string):
-            return identify_assignment.print_assignment(split_string)
     else:
         return identify_operation.identify_operations(split_string)
 
@@ -189,6 +186,7 @@ def main():
     print(identify_comparison_operators("x == y + z * 3"))
     print(identify_comparison_operators("x > y"))
     print(identify_comparison_operators("x < y"))
+    print(identify_comparison_operators("x = y"))
 
 
 if __name__ == "__main__":

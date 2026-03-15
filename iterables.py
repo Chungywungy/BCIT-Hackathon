@@ -32,19 +32,18 @@ def for_loop(split_string):
         split_string = split_string.split()
         return f"Iterates through each {split_string[1]} in the {split_string[3].replace(":", "")} using a for loop."
 
-def conditionals(split_string):
+def conditionals(split_string: list):
     lambdamentality = {
-        "if": lambda statement: f"checks {replaces_function_calls(identify_comparison_operators(statement))} then",
-        "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then",
-        "else": lambda statement: f"if none of these conditions are true it gets"
+        "if": lambda statement: f"checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
+        "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
+        "else": lambda statement: f"if none of these conditions are true it gets "
     }
 
     container = []
 
-    split = split_string.split("\n")
-    for line in split:
+    for line in split_string:
         contains_cond = False
-        for cond in {"elif", "else", "if" }:
+        for cond in {"elif", "else", "if"}:
             if cond in line:
                 argument = line[len(cond):].strip().split(":")[0]
                 container.append(f"{lambdamentality[cond](argument)}" )
@@ -64,13 +63,13 @@ def conditionals(split_string):
             container.append(value.strip()+"\n")
 
 
-    return " ".join(container)
+    return "".join(container)
 
 
 def main():
     code_block_while_loop = "while alakazam > 1: \n  abra + cadabra"
     code_block_for_loop = "for abra in cadabra: \n  do_something()"
-    code_block_conditionals = "if 1 > int(2): \n do_anything() \n elif 1 < range(2):\n please_work() \n else: \n1 + 2"
+    code_block_conditionals = ["if 1 > int(2):", "do_anything()", "elif 1 < range(2):", "please_work()", "else:", "1 + 2"]
     return conditionals(code_block_conditionals)
 
 if __name__ == "__main__":
