@@ -38,7 +38,12 @@ def replaces_function_calls(line: str) -> str:
             # stops at the index of the first parameter passed
             start = remaining.index(basic_function + "(") + len(basic_function) + 1
             # starts looking for the closing  from the start index
-            end = remaining.rindex(")", start)
+            try:
+                # apparently the ) was sliced off in the previous iteration,
+                # try except will fix this
+                end = remaining.rindex(")", start)
+            except ValueError:
+                break
             # slices the line to parse argument
             args = remaining[start: end].strip()
             function_call = remaining[function_call_index: end + 1]
