@@ -33,7 +33,7 @@ def breaker(split_string):
 
 def passer(split_string):
     if "pass" in split_string:
-        return ""
+        return "calls pass"
     else:
         return ""
 
