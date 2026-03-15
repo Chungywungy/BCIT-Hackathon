@@ -34,9 +34,9 @@ def for_loop(split_string):
 
 def conditionals(split_string):
     lambdamentality = {
-        "if": lambda statement: f"checks {replaces_function_calls(identify_comparison_operators(statement))} then",
-        "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then",
-        "else": lambda statement: f"if none of these conditions are true it gets"
+        "if": lambda statement: f"checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
+        "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
+        "else": lambda statement: f"if none of these conditions are true it gets "
     }
 
     container = []
@@ -64,7 +64,7 @@ def conditionals(split_string):
             container.append(value.strip()+"\n")
 
 
-    return " ".join(container)
+    return "".join(container)
 
 
 def main():
