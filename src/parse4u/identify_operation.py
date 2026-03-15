@@ -76,6 +76,9 @@ def identify_operations(split_string: str) -> str:
 
 
 def main():
+    """
+    Drive the program.
+    """
     my_string = "x += y"
     print(identify_operations(my_string))
     my_second_string = "x + y"
