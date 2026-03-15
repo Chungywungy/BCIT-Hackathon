@@ -1,13 +1,13 @@
-# BCIT-Hacakathon
+# BCIT-Hackathon
 
-About:
+# About
 This program allows users to input non-built-in Python functions and receive a plain-English explanation of
 what the function does. The system analyzes the structure and logic of the code, then translates it into a concise
 summary that is easy for beginner developers to understand. The goal is to make learning programming easier by
 helping users quickly grasp how code works without needing more advanced knowledge.
 
 
-Instructions:
+# Instructions:
 1. Open terminal
 2. type in "pip install parse4u"
 3. open python file
