@@ -1,37 +1,21 @@
-"""
-Working on adding int(), list(), str(), type(), input(), print()
-
-Assume that the passed argument to identify_functions() is of the format:
-    num_input = int(3.3)\n
-    variable = function(value)\n
-
-    input('Type in a number: ')\n
-    function(value)\n
-
-Assume that the passed argument can contain multi-line builtin_function calls:
-    num_input = int(3.3) + int(1.2)\n
-
-Although for now the logic is not yet complete, this will print out:
-    converts 3.3 to an integer and converts 1.2 to an integer and assigns it to num_input
-
-It doesn't yet address the arithmetic portion of the code:
-    num_input = list(int(3.3)) + int(1.2)\n
-
-This will run with no crashes but will print out:
-    convert 3.3 to an integer and convert 1.2 to an integer and assigns it to num_input
-
-
-"""
-
 def replaces_function_calls(line):
+    """
+    Acts as the final call to a function which translate any builtin function to its English counterpart. The function
+    will not interfere with any of the grammatical structure of the passed string. That is, it will only replace a
+    builtin named function.
+
+    :param line:
+    :return:
+    """
     english_translation_look_up = {
         "int": lambda param: f"{param} as an integer",
         "list": lambda param: f"{param} as a list",
         "str": lambda param: f"{param} as a string",
         "type": lambda param: f"the type of {param}",
-        "input": lambda param: f"prompts the user to: {param}",
+        "input": lambda param: f"user input provided from the prompt {param}",
         "print": lambda param: f"prints {param} to the console",
-        "range": lambda param: f"range of {param}"
+        "range": lambda param: f"range of {param}",
+        "len": lambda param: f"length of {param}"
     }
 
     new_string = line
@@ -58,12 +42,7 @@ def replaces_function_calls(line):
 
 
 def main():
-    # nested = "num_input = int(1.2) + int(1.2) + int(3.3) + list(3.4)\n"
-    # print(basic_builtin_functions_parser_new(nested))
-    # print(identify_assignment.print_assignment(nested))
-    iter = """for i in (range(3)):
-            print(i)"""
-    print(replaces_function_calls(iter))
+    pass
 
 
 if __name__ == "__main__":
