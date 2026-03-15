@@ -1,11 +1,19 @@
-def replaces_function_calls(line):
+def replaces_function_calls(line: str) -> str:
     """
-    Acts as the final call to a function which translate any builtin function to its English counterpart. The function
-    will not interfere with any of the grammatical structure of the passed string. That is, it will only replace a
-    builtin named function.
+    Generate a natural language translation of built-in Python function calls.
 
-    :param line:
-    :return:
+    If the provided string contains built-in Python functions (such as int,
+    str, len, print, etc.), the function replaces those calls with their
+    English descriptions while preserving the rest of the sentence structure.
+
+    :param line: A string that may contain built-in Python function calls.
+    :precondition: line is a string containing valid Python code or expressions.
+    :postcondition: any recognized built-in function calls in the string are
+                    replaced with their English equivalents.
+    :postcondition: parts of the string that do not contain recognized
+                    function calls remain unchanged.
+    :return: a string where built-in Python function calls are replaced with
+             descriptive English phrases.
     """
     english_translation_look_up = {
         "int": lambda param: f"{param} as an integer",
@@ -42,7 +50,10 @@ def replaces_function_calls(line):
 
 
 def main():
-    pass
+    """
+    Drive the program.
+    """
+    return
 
 
 if __name__ == "__main__":

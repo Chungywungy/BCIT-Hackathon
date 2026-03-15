@@ -36,7 +36,7 @@ def parse_logical_operators(split_string: str, operator: str) -> list:
     return [first_operand, second_operand]
 
 
-def identify_comparison_operators(split_string: str):
+def identify_comparison_operators(split_string: str) -> str:
     """
     Recursively identify and explain the comparison operators in an expression in a plain English( a line of code).
 
@@ -61,10 +61,12 @@ def identify_comparison_operators(split_string: str):
         return f"{identify_comparison_operators(result[0])} is not equal to {identify_comparison_operators(result[1])}"
     elif "<=" in split_string:
         result = parse_logical_operators(split_string, "<=")
-        return f"{identify_comparison_operators(result[0])} is less than or equal to {identify_comparison_operators(result[1])}"
+        return (f"{identify_comparison_operators(result[0])} is less than or equal to "
+                f"{identify_comparison_operators(result[1])}")
     elif ">=" in split_string:
         result = parse_logical_operators(split_string, ">=")
-        return f"{identify_comparison_operators(result[0])} is greater than or equal to{identify_comparison_operators(result[1])}"
+        return (f"{identify_comparison_operators(result[0])} is greater than or equal to"
+                f"{identify_comparison_operators(result[1])}")
     elif "<" in split_string:
         result = parse_logical_operators(split_string, "<")
         return f"{identify_comparison_operators(result[0])} is less than {identify_comparison_operators(result[1])}"
@@ -75,7 +77,7 @@ def identify_comparison_operators(split_string: str):
         return identify_operations(split_string)
 
 
-def identify_membership_operators(split_string: str):
+def identify_membership_operators(split_string: str) -> str:
     """
     Recursively identify and explain membership operations in an expression.
 

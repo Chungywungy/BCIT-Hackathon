@@ -1,4 +1,19 @@
-def try_and_except(split_string):
+def try_and_except(split_string: str) -> str | None:
+    """
+    Generate a natural language description of try, except, raise, or finally statements.
+
+    If the provided string contains Python exception-handling keywords, the function
+    translates them into descriptive English sentences explaining the program's behavior.
+
+    :param split_string: A string that may contain Python exception-handling statements.
+    :precondition: split_string is a string containing valid Python code.
+    :postcondition: returns a descriptive string explaining the behavior of try,
+                    raise, except, or finally statements if they are found in split_string.
+    :postcondition: the function returns None if no exception-handling keywords
+                    are found in split_string.
+    :return: a descriptive string explaining the exception-handling behavior,
+             or None if no relevant statement is present.
+    """
     lines = split_string.split()
 
     for term in lines:
@@ -18,6 +33,9 @@ def try_and_except(split_string):
 
 
 def main():
+    """
+    Drive the program.
+    """
     print(try_and_except("try:"))
     print(try_and_except("except ValueError:"))
     print(try_and_except("raise ValueError(\"Useful message\")"))
