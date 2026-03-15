@@ -1,5 +1,5 @@
-import parse_function_declaration
-import iterables
+from .parse_function_declaration import parse_function_declaration
+from .iterables import conditionals
 
 
 def generate():
@@ -15,9 +15,9 @@ def generate():
         contents.append(line)
 
 
-    line1 = parse_function_declaration.parse_function_declaration(contents[0])
+    line1 = parse_function_declaration(contents[0])
     contents.pop(0)
-    result = iterables.conditionals(contents)
+    result = conditionals(contents)
 
     print(line1)
     print(result)

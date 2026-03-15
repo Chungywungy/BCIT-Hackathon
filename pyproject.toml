@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "parse4u"
-version = "1.0.6"
+version = "1.0.8"
 description = "converts python language into plain english"
 readme = { file = "README.md", content-type = "text/markdown" }
 license = { text = "MIT" }

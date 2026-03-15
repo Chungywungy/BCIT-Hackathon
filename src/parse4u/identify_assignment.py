@@ -1,4 +1,4 @@
-import identify_operation
+from .identify_operation import identify_operations
 
 
 def identify_assignment(split_string: str):
@@ -14,7 +14,7 @@ def print_assignment(split_string_line: str):
     index = 0
     assigner = ""
     while index < len(string_parts):
-        assigner = identify_operation.identify_operations(string_parts[index].strip())
+        assigner = identify_operations(string_parts[index].strip())
         index += 1
 
     return f"Sets {assignee} equal to {assigner}"

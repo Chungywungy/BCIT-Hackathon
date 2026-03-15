@@ -1,6 +1,6 @@
-from src.parse4u.identify_logical_operators import *
-from src.parse4u.identify_functions import *
-from try_except import *
+from .identify_logical_operators import identify_comparison_operators
+from .identify_functions import replaces_function_calls
+from .try_except import try_and_except
 
 def while_loop(split_string: str) -> str | None:
     if "while" in split_string:
