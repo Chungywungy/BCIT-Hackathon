@@ -13,7 +13,7 @@ def while_loop(split_string):
 def for_loop(split_string):
     if "for" in split_string:
         split_string = split_string.split()
-        return f"Iterates through each {split_string[1]} in the {split_string[3].replace(":", "")} using a for loop."
+        return f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop."
 
 def conditionals(split_string: list):
     lambdamentality = {
@@ -54,7 +54,7 @@ def conditionals(split_string: list):
 
 def main():
     code_block_conditionals = ["if 1 > int(2):", "do_anything()", "elif 1 < range(2):", "please_work()", "else:", "1 + 2"]
-    sample = ["while True:"]
+    sample = ["for number in range(int(9)):"]
     return conditionals(sample)
 
 if __name__ == "__main__":
