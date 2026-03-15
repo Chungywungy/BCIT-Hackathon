@@ -3,8 +3,9 @@
 # so list[index] refers to each line in the string
 # precondition : there is a white space around operators -saba
 
-# i think += and -= should be in assignment instead of operators, im not going to move them this instant but
+# I think += and -= should be in assignment instead of operators, im not going to move them this instant but
 # this should be considered for making everything mesh in the future when we're refactoring this -ollie
+
 
 def return_operations(split_string: str, operator: str) -> list:
     """
@@ -23,6 +24,7 @@ def return_operations(split_string: str, operator: str) -> list:
     second_operand = parts[1].strip()
 
     return [first_operand, second_operand]
+
 
 def identify_operations(split_string: str) -> str:
     """
@@ -84,8 +86,8 @@ def main():
     my_second_string = "x + y"
     print(identify_operations(my_second_string))
     # i minorly refactored this function for this exact case. i feel like this reads a heck of a lot better than
-    # "increases x by x added to y" which is what the recursive case would give us. i will look more into what
-    # sort of edge cases this approach could produce though and we'll come up with a final decision tmrw
+    # "increases x by x added to y" which is what the recursive case would give us. I will look more into what
+    # sort of edge cases this approach could produce though, and we'll come up with a final decision tmrw
     my_third_string = "x += (x + (c ** y)) * 2"
     print(identify_operations(my_third_string))
 

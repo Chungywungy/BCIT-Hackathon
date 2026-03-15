@@ -30,7 +30,6 @@ def generate() -> str:
             break
         contents.append(line)
 
-
     line1 = parse_function_declaration(contents[0])
     contents.pop(0)
     result = conditionals(contents)
@@ -39,12 +38,14 @@ def generate() -> str:
     print(result)
     return "".join(result)
 
+
 def main():
     """
     Drive the program.
     """
     generate()
     return
+
 
 if __name__ == "__main__":
     main()

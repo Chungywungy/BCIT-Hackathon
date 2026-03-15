@@ -2,8 +2,9 @@ from .identify_logical_operators import identify_comparison_operators
 from .identify_functions import replaces_function_calls
 from .try_except import try_and_except
 
+
 def while_loop(split_string: str) -> str | None:
-    '''
+    """
     Generate a natural language description of a while loop.
 
     If the provided string contains a Python while statement, the function
@@ -17,16 +18,16 @@ def while_loop(split_string: str) -> str | None:
     :postcondition: the function returns None if "while" is not found in split_string.
     :return: a descriptive string explaining the while loop, or None if no
              while loop is present.
-    '''
+    """
     if "while" in split_string:
         storage = split_string.split(":")[0].split("while")[1].strip()
 
-
         return (f'While {replaces_function_calls(identify_comparison_operators(storage))} is true, it repeatedly '
                 f' {continuation(split_string)}{breaker(split_string)}{passer(split_string)}')
+    return None
 
 
-def for_loop(split_string: str) -> str | None:
+def for_loop(split_string: list[str]) -> str | None:
     """
     Generate a natural language description of a for loop.
 
@@ -35,7 +36,7 @@ def for_loop(split_string: str) -> str | None:
     sentence explaining the loop's behavior.
 
     :param split_string: A string that may contain a Python for loop.
-    :precondition: split_string is a string containing valid Python code.
+    :precondition: split_string is a list of strings containing valid Python code.
     :postcondition: write a descriptive string explaining the loop variable
                     and iterable if "for" is found in split_string, and it
                     represents a valid for loop.
@@ -48,8 +49,10 @@ def for_loop(split_string: str) -> str | None:
         idx = split_string.find("for")
         if split_string[idx + len("for")].isalpha(): return None
         split_string = split_string.split()
-        return (f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop. "
-                f"{continuation(split_string)}{breaker(split_string)}{passer(split_string)} ")
+        return (
+            f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop. "
+            f"{continuation(split_string)}{breaker(split_string)}{passer(split_string)} ")
+    return None
 
 
 def continuation(split_string: str) -> str:
@@ -74,6 +77,7 @@ def continuation(split_string: str) -> str:
         return f"the loop then goes to the top and begins again "
     return ""
 
+
 def breaker(split_string: str) -> str:
     """
     Generate a natural language description of a break statement.
@@ -94,6 +98,7 @@ def breaker(split_string: str) -> str:
         return f"it then exits the loop "
     else:
         return ""
+
 
 def passer(split_string: str) -> str:
     """
@@ -134,7 +139,8 @@ def conditionals(split_string: list) -> str:
     """
     lambdamentality = {
         "if": lambda statement: f"checks if {replaces_function_calls(identify_comparison_operators(statement))} then ",
-        "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
+        "elif": lambda
+            statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
         "else": lambda statement: f"otherwise it will "
     }
 
@@ -145,7 +151,7 @@ def conditionals(split_string: list) -> str:
         for cond in {"elif", "else", "if"}:
             if cond in line:
                 argument = line[len(cond):].strip().split(":")[0]
-                container.append(f"{lambdamentality[cond](argument)}" )
+                container.append(f"{lambdamentality[cond](argument)}")
                 non_applicable = True
                 break
 
@@ -163,32 +169,31 @@ def conditionals(split_string: list) -> str:
 
             continuation_output = continuation(line)
             if continuation_output:
-                container.append(continuation_output+"\n")
+                container.append(continuation_output + "\n")
                 non_applicable = True
                 break
 
             breaker_output = breaker(line)
             if breaker_output:
-                container.append(breaker_output+"\n")
+                container.append(breaker_output + "\n")
                 non_applicable = True
                 break
 
             passer_output = passer(line)
             if passer_output:
-                container.append(passer_output+"\n")
+                container.append(passer_output + "\n")
                 non_applicable = True
                 break
 
             try_except_output = try_and_except(line)
             if try_except_output:
-                container.append(try_except_output+"\n")
+                container.append(try_except_output + "\n")
                 non_applicable = True
                 break
 
         if not non_applicable:
             value = replaces_function_calls(identify_comparison_operators(line))
-            container.append(value.strip()+"\n")
-
+            container.append(value.strip() + "\n")
 
     return "".join(container)
 
@@ -197,9 +202,11 @@ def main():
     """
     Drive the program.
     """
-    code_block_conditionals = ["if 1 > int(2):", "do_anything()", "elif 1 < range(2):", "please_work()", "else:", "1 + 2"]
+    code_block_conditionals = ["if 1 > int(2):", "do_anything()", "elif 1 < range(2):", "please_work()", "else:",
+                               "1 + 2"]
     sample = ["while number > 1: pass"]
     return conditionals(sample)
+
 
 if __name__ == "__main__":
     print(main())
