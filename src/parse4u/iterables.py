@@ -50,7 +50,8 @@ def for_loop(split_string: list[str]) -> str | None:
         if split_string[idx + len("for")].isalpha(): return None
         split_string = split_string.split()
         return (
-            f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop. "
+            f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))}"
+            f" using a for loop. "
             f"{continuation(split_string)}{breaker(split_string)}{passer(split_string)} ")
     return None
 

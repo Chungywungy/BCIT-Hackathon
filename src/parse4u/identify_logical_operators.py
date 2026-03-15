@@ -61,10 +61,12 @@ def identify_comparison_operators(split_string: str) -> str:
         return f"{identify_comparison_operators(result[0])} is not equal to {identify_comparison_operators(result[1])}"
     elif "<=" in split_string:
         result = parse_logical_operators(split_string, "<=")
-        return f"{identify_comparison_operators(result[0])} is less than or equal to {identify_comparison_operators(result[1])}"
+        return (f"{identify_comparison_operators(result[0])} is less than or equal to "
+                f"{identify_comparison_operators(result[1])}")
     elif ">=" in split_string:
         result = parse_logical_operators(split_string, ">=")
-        return f"{identify_comparison_operators(result[0])} is greater than or equal to{identify_comparison_operators(result[1])}"
+        return (f"{identify_comparison_operators(result[0])} is greater than or equal to"
+                f"{identify_comparison_operators(result[1])}")
     elif "<" in split_string:
         result = parse_logical_operators(split_string, "<")
         return f"{identify_comparison_operators(result[0])} is less than {identify_comparison_operators(result[1])}"
