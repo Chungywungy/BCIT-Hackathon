@@ -19,7 +19,7 @@ def conditionals(split_string: list):
     lambdamentality = {
         "if": lambda statement: f"checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
         "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
-        "else": lambda statement: f"if none of these conditions are true it gets "
+        "else": lambda statement: f"if none of these conditions are true it executes "
     }
 
     container = []
@@ -53,8 +53,6 @@ def conditionals(split_string: list):
 
 
 def main():
-    code_block_while_loop = "while alakazam > 1: \n  abra + cadabra"
-    code_block_for_loop = "for abra in cadabra: \n  do_something()"
     code_block_conditionals = ["if 1 > int(2):", "do_anything()", "elif 1 < range(2):", "please_work()", "else:", "1 + 2"]
     sample = ["while True:"]
     return conditionals(sample)

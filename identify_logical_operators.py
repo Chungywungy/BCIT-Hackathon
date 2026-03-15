@@ -56,22 +56,22 @@ def identify_comparison_operators(split_string: str):
     """
     if "==" in split_string:
         result = parse_logical_operators(split_string, "==")
-        return "{} is equal to {}".format(result[0], identify_comparison_operators(result[1]))
+        return f"{result[0]} is equal to {identify_comparison_operators(result[1])}"
     elif "!=" in split_string:
         result = parse_logical_operators(split_string, "!=")
-        return "{} is not equal to {}".format(result[0], identify_comparison_operators(result[1]))
+        return f"{result[0]} is not equal to {identify_comparison_operators(result[1])}"
     elif "<=" in split_string:
         result = parse_logical_operators(split_string, "<=")
-        return "{} is less than or equal to {}".format(result[0], identify_comparison_operators(result[1]))
+        return f"{result[0]} is less than or equal to {identify_comparison_operators(result[1])}"
     elif ">=" in split_string:
         result = parse_logical_operators(split_string, ">=")
-        return "{} is greater than or equal to {}".format(result[0], identify_comparison_operators(result[1]))
+        return f"{result[0]} is greater than or equal to{identify_comparison_operators(result[1])}"
     elif "<" in split_string:
         result = parse_logical_operators(split_string, "<")
-        return "{} is less than {}".format(result[0], identify_comparison_operators(result[1]))
+        return f"{result[0]} is less than {identify_comparison_operators(result[1])}"
     elif ">" in split_string:
         result = parse_logical_operators(split_string, ">")
-        return "{} is greater than {}".format(result[0], identify_comparison_operators(result[1]))
+        return f"{result[0]} is greater than {identify_comparison_operators(result[1])}"
     else:
         return identify_operation.identify_operations(split_string)
 
@@ -106,65 +106,65 @@ def identify_membership_operators(split_string: str):
         second_operand = identify_membership_operators(result[1])
         if parts[not_index + 1] == "in":
             if result[0] is None:
-                return "is not in{}".format(second_operand)
+                return f"is not in{second_operand}"
             elif result[1] is None:
-                return "{}is not in".format(first_operand)
+                return f"{first_operand}is not in"
             else:
-                return "{} is not{}".format(first_operand, second_operand)
+                return f"{first_operand} is not{second_operand}"
         elif parts[not_index - 1] == "is":
             if result[0] is None:
-                return "not {}".format(second_operand)
+                return f"not {second_operand}"
             elif result[1] is None:
-                return "{} not".format(first_operand)
+                return f"{first_operand} not"
             else:
-                return "{}not {}".format(first_operand, second_operand)
+                return f"{first_operand}not {second_operand}"
         else:
             if result[0] is None:
-                return "is not{}".format(second_operand)
+                return f"is not{second_operand}"
             elif result[1] is None:
-                return "{} is not".format(first_operand)
+                return f"{first_operand} is not"
             else:
-                return "{} is not {}".format(first_operand, second_operand)
+                return f"{first_operand} is not {second_operand}"
     elif "and" in parts:
         result = parse_logical_operators(split_string, "and")
         first_operand = identify_membership_operators(result[0])
         second_operand = identify_membership_operators(result[1])
         if result[0] is None:
-            return "and {}".format(second_operand)
+            return f"and {second_operand}"
         elif result[1] is None:
-            return "{} and".format(first_operand)
+            return f"{first_operand} and"
         else:
-            return "{} and {}".format(first_operand, second_operand)
+            return f"{first_operand} and {second_operand}"
     elif "or" in parts:
         result = parse_logical_operators(split_string, "or")
         first_operand = identify_membership_operators(result[0])
         second_operand = identify_membership_operators(result[1])
         if result[0] is None:
-            return "or {}".format(second_operand)
+            return f"or {second_operand}"
         elif result[1] is None:
-            return "{} or".format(first_operand)
+            return f"{first_operand} or"
         else:
-            return "{} or {}".format(first_operand, second_operand)
+            return f"{first_operand} or {second_operand}"
     elif "is" in parts:
         result = parse_logical_operators(split_string, "is")
         first_operand = identify_membership_operators(result[0])
         second_operand = identify_membership_operators(result[1])
         if result[0] is None:
-            return "is {}".format(second_operand)
+            return f"is {second_operand}"
         elif result[1] is None:
-            return "{} is".format(first_operand)
+            return f"{first_operand} is"
         else:
-            return "{} is {}".format(first_operand, second_operand)
+            return f"{first_operand} is {second_operand}"
     elif "in" in parts:
         result = parse_logical_operators(split_string, "in")
         first_operand = identify_membership_operators(result[0])
         second_operand = identify_membership_operators(result[1])
         if result[0] is None:
-            return "in {}".format(second_operand)
+            return f"in {second_operand}"
         elif result[1] is None:
-            return "{} in".format(first_operand)
+            return f"{first_operand} in"
         else:
-            return "{} in {}".format(first_operand, second_operand)
+            return f"{first_operand} in {second_operand}"
     else:
         return identify_comparison_operators(split_string)
 

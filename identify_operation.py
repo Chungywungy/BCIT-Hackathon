@@ -44,33 +44,33 @@ def identify_operations(split_string: str) -> str:
     if "+=" in split_string:
         result = return_operations(split_string, "+=")
 
-        return "Increases {} by {}".format(result[0], identify_operations(result[1]))
+        return f"Increases {result[0]} by {identify_operations(result[1])}"
     elif "-=" in split_string:
         result = return_operations(split_string, "-=")
 
-        return "Decrease {} by {}".format(result[0], identify_operations(result[1]))
+        return f"Decrease {result[0]} by {identify_operations(result[1])}"
     elif "**=" in split_string:
         # we should do this first otherwise we're not getting into this block
         result = return_operations(split_string, "**=")
 
-        return "Set {} to itself raised to the power of {}.".format(result[0], identify_operations(result[1]))
+        return f"Set {result[0]} to itself raised to the power of {identify_operations(result[1])}."
     elif "*=" in split_string:
         # *= and * are translated the same
         result = return_operations(split_string, "*=")
 
-        return "Multiply {} by {}".format(result[0], identify_operations(result[1]))
+        return f"Multiply {result[0]} by {identify_operations(result[1])}"
     elif "/=" in split_string:
         result = return_operations(split_string, "/=")
 
-        return "Divide {} by {}".format(result[0], identify_operations(result[1]))
+        return f"Divide {result[0]} by {identify_operations(result[1])}"
     elif "%=" in split_string:
         result = return_operations(split_string, "%=")
 
-        return "Set {} to the remainder when divided by {}".format(result[0], identify_operations(result[1]))
+        return f"Set {result[0]} to the remainder when divided by {identify_operations(result[1])}"
     elif "=" in split_string:
         result = return_operations(split_string, "=")
 
-        return "sets {} equal to {}".format(result[0], identify_operations(result[1]))
+        return f"sets {result[0]} equal to {identify_operations(result[1])}"
     elif "**" in split_string:
         return split_string.replace("**", "^")
     else:

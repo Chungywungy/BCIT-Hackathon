@@ -24,7 +24,7 @@ def get_return_type(function_string: str) -> str:
         return_type = return_type[1].replace(":", "").strip()
         # this gets the return type of the function
     else:
-        return_type = "" # return type is None when the function_string does not include the return annotation
+        return_type = ""  # return type is None when the function_string does not include the return annotation
     # print("return type:", return_type)
     return return_type
 
@@ -125,7 +125,7 @@ def parse_function_declaration(function_string: str) -> str:
     function_name = get_function_name(function_string)
     parameter_text = get_parameters(function_string)
 
-    if return_type:  # runs if there is a return type (not None)
+    if return_type:  # runs if there is a return type
         function_declaration_string = (f"{function_name} is declared as a function. It takes {parameter_text} and "
                                        f"returns {return_type}.")
     else:  #runs if there return type is None
@@ -139,31 +139,31 @@ def main():
     Drive the function.
     """
     # with 3 parameters and annotations
-    parse_function_declaration("def function_name(x: int, y: float, z: str) -> int:")
+    print(parse_function_declaration("def function_name(x: int, y: float, z: str) -> int:"))
 
     #with 2 parameters and annotations
-    parse_function_declaration("def function_name(x: int, y: float) -> int:")
+    print(parse_function_declaration("def function_name(x: int, y: float) -> int:"))
 
     # with 1 parameter and annotations
-    parse_function_declaration("def function_name(x: int) -> int:")
+    print(parse_function_declaration("def function_name(x: int) -> int:"))
 
     # with 3 parameters without annotations
-    parse_function_declaration("def function_name(x, y, z) -> int:")
+    print(parse_function_declaration("def function_name(x, y, z) -> int:"))
 
     # with 2 parameters without annotations
-    parse_function_declaration("def function_name(x, y) -> int:")
+    print(parse_function_declaration("def function_name(x, y) -> int:"))
 
     # with 1 parameter without annotations
-    parse_function_declaration("def function_name(x) -> int:")
+    print(parse_function_declaration("def function_name(x) -> int:"))
 
     # with parameters without annotations, without return annotation
-    parse_function_declaration("def function_name(x, y)")
+    print(parse_function_declaration("def function_name(x, y)"))
 
     #without parameters
-    parse_function_declaration("def another_function() -> int:")
+    print(parse_function_declaration("def another_function() -> int:"))
 
     #without parameters and return annotation
-    parse_function_declaration("def wow_another_one():")
+    print(parse_function_declaration("def wow_another_one():"))
 
 
 if __name__ == "__main__":
