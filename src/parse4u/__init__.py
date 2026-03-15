@@ -1,4 +1,4 @@
-from .docstring_generator import generate
+from .docstring_generator import generate, format_text
 from .identify_assignment import print_assignment
 from .identify_functions import replaces_function_calls
 from .identify_logical_operators import parse_logical_operators, identify_comparison_operators, identify_membership_operators

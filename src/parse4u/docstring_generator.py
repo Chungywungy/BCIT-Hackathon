@@ -2,7 +2,7 @@ from .parse_function_declaration import parse_function_declaration
 from .iterables import conditionals
 
 
-def generate() -> str:
+def generate(width: int=0) -> str:
     """
     Generate a natural language description of a user-provided Python function.
 
@@ -34,9 +34,30 @@ def generate() -> str:
     contents.pop(0)
     result = conditionals(contents)
 
+    if width:
+        result = format_text(result, width)
+
     print(line1)
     print(result)
-    return "".join(result)
+
+def format_text(text: str, width: int=150):
+    words = text.split()  # splits on any whitespace
+    lines = []
+    current = ""
+
+    for word in words:
+        candidate = current + " " + word if current else word
+        if len(candidate) <= width:
+            current = candidate
+        else:
+            if current:
+                lines.append(current)
+            current = word
+
+    if current:
+        lines.append(current)
+
+    return "\n".join(lines)
 
 
 def main():
