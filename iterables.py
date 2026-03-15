@@ -70,7 +70,8 @@ def conditionals(split_string):
 def main():
     code_block_while_loop = "while alakazam > 1: \n  abra + cadabra"
     code_block_for_loop = "for abra in cadabra: \n  do_something()"
-    code_block_conditionals = "if 1 > int(2): \n do_anything() \n elif 1 < range(2):\n please_work() \n else: \n1 + 2"
+    code_block_conditionals = "if 1 > int(2):\n\tdo_anything()\nelse 1 < range(2):\n\tplease_work() \nelse:\n\t1 + 2"
+    print(code_block_conditionals)
     return conditionals(code_block_conditionals)
 
 if __name__ == "__main__":
