@@ -38,7 +38,7 @@ def passer(split_string):
 
 def conditionals(split_string: list):
     lambdamentality = {
-        "if": lambda statement: f"checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
+        "if": lambda statement: f"checks if {replaces_function_calls(identify_comparison_operators(statement))} then ",
         "elif": lambda statement: f"otherwise it checks {replaces_function_calls(identify_comparison_operators(statement))} then ",
         "else": lambda statement: f"if none of these conditions are true it "
     }
