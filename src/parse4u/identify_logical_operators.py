@@ -2,7 +2,7 @@
 This module identifies and explains logical operations and comparison operations in
 a line of a function.
 """
-import identify_operation
+from .identify_operation import identify_operations
 
 
 def parse_logical_operators(split_string: str, operator: str) -> list:
@@ -72,7 +72,7 @@ def identify_comparison_operators(split_string: str):
         result = parse_logical_operators(split_string, ">")
         return f"{identify_comparison_operators(result[0])} is greater than {identify_comparison_operators(result[1])}"
     else:
-        return identify_operation.identify_operations(split_string)
+        return identify_operations(split_string)
 
 
 def identify_membership_operators(split_string: str):
