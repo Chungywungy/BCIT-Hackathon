@@ -23,7 +23,7 @@ keywords = ["automation", "parsing", "Summarizing"]
 Homepage = "https://github.com/Chungywungy/BCIT-Hacakathon"
 Documentation = "https://github.com/Chungywungy/BCIT-Hacakathon"
 Source = "https://github.com/Chungywungy/BCIT-Hacakathon/tree/main/src/parse4u"
-Issues = ""
+
 
 [tool.setuptools]
 package-dir = {"" = "src"}
