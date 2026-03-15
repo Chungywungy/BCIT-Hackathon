@@ -12,6 +12,8 @@ def while_loop(split_string: str) -> str | None:
 
 def for_loop(split_string: str) -> str | None:
     if "for" in split_string:
+        idx = split_string.find("for")
+        if split_string[idx + len("for")].isalpha(): return None
         split_string = split_string.split()
         return f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop. {continuation(split_string)} "
 
