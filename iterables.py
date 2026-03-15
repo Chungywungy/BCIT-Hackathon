@@ -2,20 +2,26 @@ from identify_operation import *
 from identify_logical_operators import *
 from identify_functions import *
 
-def while_loop(split_string):
+def while_loop(split_string: str) -> str | None:
     if "while" in split_string:
         storage = split_string.split(":")[0].split("while")[1].strip()
 
 
-        return f'While {replaces_function_calls(identify_comparison_operators(storage))} is true, it repeatedly '
+        return f'While {replaces_function_calls(identify_comparison_operators(storage))} is true, it repeatedly executes {continuation(split_string)}'
 
 
-def for_loop(split_string):
+def for_loop(split_string: str) -> str | None:
     if "for" in split_string:
-        idx = split_string.find("for")
-        if split_string[idx + len("for")].isalpha(): return None
         split_string = split_string.split()
-        return f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop."
+        return f"Iterates through each {split_string[1]} in the {replaces_function_calls(split_string[3].replace(":", ""))} using a for loop. {continuation(split_string)} "
+
+
+def continuation(split_string):
+    if "continue" in split_string:
+        return f"the loop then goes to the top and begins again"
+    else:
+        return ""
+
 
 def conditionals(split_string: list):
     lambdamentality = {
@@ -56,7 +62,7 @@ def conditionals(split_string: list):
 
 def main():
     code_block_conditionals = ["if 1 > int(2):", "do_anything()", "elif 1 < range(2):", "please_work()", "else:", "1 + 2"]
-    sample = ['print("Wrong! The number was {}, you\'ll lose 1HP!".format(secret_number))']
+    sample = ["while number > 1: continue "]
     return conditionals(sample)
 
 if __name__ == "__main__":
